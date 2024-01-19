@@ -8,6 +8,7 @@ const currentPageInput = document.getElementById('currentPage');
 let currentPage = 1;
 function fetchAllReposOfUser(user,page) {
   loader.style.display="block";
+  userInfo2.style.display="none";
   fetch(`https://api.github.com/users/${user}/repos?per_page=10&page=${page}`)
   .then(response => response.json())
   .then(userRepos => {
@@ -17,6 +18,7 @@ function fetchAllReposOfUser(user,page) {
       userInfo2.innerHTML = `<h1>User is Not Found</h1>`;
     } else {
         loader.style.display="none";
+        userInfo2.style.display="flex";
         userInfo2.innerHTML = userRepos.map(repo => `
           <div class="repo-box">
               <h4 class="blue-103 fw-bold fs-5">${repo.name} &nbsp;</h4>
