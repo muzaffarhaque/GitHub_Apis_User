@@ -2,18 +2,22 @@
 let searchbth = document.getElementById("searchbth")
 let searchval = document.getElementById("serchValue")
 const userDropdown = document.getElementById('userDropdown');
-
-function fetchAllReposOfUser(user) {
-  fetch(`https://api.github.com/users/${user}/repos?per_page=10&page=2`)
+const loader = document.getElementById('loader');
+const userInfo2 = document.getElementById('reposBox');
+const currentPageInput = document.getElementById('currentPage');
+let currentPage = 1;
+function fetchAllReposOfUser(user,page) {
+  loader.style.display="block";
+  fetch(`https://api.github.com/users/${user}/repos?per_page=10&page=${page}`)
   .then(response => response.json())
   .then(userRepos => {
     console.log(userRepos);
     
     if (userRepos.message === 'Not Found') {
-      userInfo.innerHTML = `<h1>User is Not Found</h1>`;
+      userInfo2.innerHTML = `<h1>User is Not Found</h1>`;
     } else {
-        const userInfo = document.getElementById('reposBox');
-        userInfo.innerHTML = userRepos.map(repo => `
+        loader.style.display="none";
+        userInfo2.innerHTML = userRepos.map(repo => `
           <div class="repo-box">
               <h4 class="blue-103 fw-bold fs-5">${repo.name} &nbsp;</h4>
               <p>${repo.description || 'No description available'}</p>
@@ -24,14 +28,37 @@ function fetchAllReposOfUser(user) {
         `).join('');
       }
     })
-    .catch(error => console.error('Error fetching user details:', error));
+    .catch(error =>
+      {
+       console.error('Error fetching user details:', error);
+       loader.style.display="none";
+    }
+       );
 }
 
 
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    currentPageInput.value = currentPage;
+    fetchAllReposOfUser('muzaffarhaque', currentPage);
+  }
+}
+function changPagination() {
+
+  fetchAllReposOfUser('muzaffarhaque', currentPageInput.value);
+
+}
+
+function nextPage() {
+  currentPage++;
+  currentPageInput.value = currentPage;
+  fetchAllReposOfUser('muzaffarhaque', currentPage);
+}
 
 
 function getRepDetailsApi(selectedUser) {
-
+  console.log("this is userer",selectedUser)
   fetch(`https://api.github.com/users/${selectedUser}`)
     .then(response => response.json())
     .then(userDetails => {
@@ -43,6 +70,7 @@ function getRepDetailsApi(selectedUser) {
         userInfo.innerHTML = `
         <h1>User is Not Found</h1>
         `;
+        userInfo2.style.display="none";
       }else{
         userInfo.innerHTML = `
         <div class="user-details-bpx">
@@ -64,6 +92,7 @@ function getRepDetailsApi(selectedUser) {
       <p class="user-profile-linke my-4"><img src="./images/link-solid.svg" class="icon" alt=""> &nbsp;&nbsp;&nbsp;<a href=${userDetails.html_url} target="_blank">${userDetails.html_url || "Na"}</a></p>
           
       `;
+      userInfo2.style.display="flex";
       fetchAllReposOfUser(selectedUser)
       }
  
@@ -73,18 +102,20 @@ function getRepDetailsApi(selectedUser) {
 }
 
 searchbth.addEventListener('click', () => {
-  getRepDetailsApi(searchval)
+  console.log(searchval.value)
+  getRepDetailsApi(searchval.value)
   userDropdown.value=""
 })
 
 
-const loader = document.getElementById('loader');
+
 fetch('https://api.github.com/users?per_page=100000')
   .then(response => response.json())
   .then(users => {
    
     // Populate dropdown options
     getRepDetailsApi("muzaffarhaque")
+    // getRepDetailsApi("")
     users.forEach(user => {
       const option = document.createElement('option');
       option.value = user.login;
