@@ -1,0 +1,142 @@
+
+.container {
+    max-width: 1440px;
+    width: 100%;
+    padding: 0 clamp(10px,5%,123px);
+}
+/* COMMON CSS START */
+.primary-btn {
+    padding: 8px 16px;
+    background-color: rgb(103, 191, 250);
+    color: white;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    box-sizing: none;
+    cursor: pointer;
+    text-align: center;
+
+}
+.blue-103{
+    color: rgb(103, 191, 250);
+}
+/* COMMON CSS END */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/* HEADER CSS START */
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    max-width: 1440px;
+    width: 100%;
+    padding: 20px clamp(10px,5%,123px);
+
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 400px;
+
+}
+.pointer {
+    cursor: pointer;
+}
+.input-box {
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid rgb(236, 233, 233);
+    outline: none;
+    background-color: white;
+    font-size: 15px;
+    line-height: 21px;
+    font-weight: 500;
+    padding: 8px 16px;
+
+}
+/* HEADER CSS END */
+/*  */
+/*  */
+.user-details-bpx {
+    width: 100%;
+    display: flex;
+    align-items: start;
+    gap: clamp(20px,4%,60px);
+    flex-wrap: wrap;
+    padding: 40px clamp(10px,3%,30px);
+
+}
+.profile-box {
+    width: clamp(250px,25%,350px);
+
+}
+.icon {
+    width: 21px;
+
+}
+.profile-Image {
+    width: clamp(250px,25%,350px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user-info {
+    width: 52%;
+}
+.user-info {}
+.user-info {}
+
+.repos-frame {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px clamp( 10px,3%,40px);
+    max-width: 1440px;
+    width: 100%;
+    padding: 20px clamp(10px,5%,123px);
+    margin: auto;
+
+}
+.user-folower{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.repo-box{
+    padding: 10px;
+    border: 2px solid black;
+    
+    width: clamp(250px,50%,550px);
+    min-height: 134px;
+    
+
+}
+.topic-frame{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+@media (max-width:920px) {
+    .profile-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .user-info {
+        word-wrap: 100%;
+    }
+    .profile-Image {
+        width: clamp(250px,100%,350px);
+    }
+}
