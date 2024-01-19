@@ -6,6 +6,7 @@ const loader = document.getElementById('loader');
 const userInfo2 = document.getElementById('reposBox');
 const currentPageInput = document.getElementById('currentPage');
 let currentPage = 1;
+let totalCountRepo=0;
 function fetchAllReposOfUser(user,page) {
   loader.style.display="block";
   userInfo2.style.display="none";
@@ -95,6 +96,7 @@ function getRepDetailsApi(selectedUser) {
           
       `;
       userInfo2.style.display="flex";
+      totalCountRepo=  userDetails.public_repos;
       fetchAllReposOfUser(selectedUser)
       }
  

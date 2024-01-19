@@ -135,10 +135,14 @@
         justify-content: center;
     }
     .user-info {
-        word-wrap: 100%;
+        width: 100%;
     }
     .profile-Image {
         width: clamp(250px,100%,350px);
+    }
+    .repo-box{
+        max-width: 100%;
+        width: 100%;
     }
 }
 
